@@ -74,7 +74,7 @@ function App() {
   //新增圖片
   const HandleAddImage = () => {
     setTemplateProduct((pre) => {
-      const newImage = [...pre.imagesUrl];
+      const newImage = [...(pre.imagesUrl || [])];
       newImage.push("");
       return {
         ...pre,
@@ -205,10 +205,11 @@ function App() {
   const openModule = (type, product) => {
     //console.log(product);
     setModalType(type);
-    setTemplateProduct((pre) => ({
-      ...pre,
+    setTemplateProduct({
+      ...INITIAL_TEMPLATE_DATA,
       ...product,
-    }));
+      imagesUrl: product?.imagesUrl || [],
+    });
     productModalRef.current.show();
   };
 
